@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang='en' ng-app = 'medicalApp'>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Angular js Example</title>		
+		<link rel="stylesheet/less" type="text/css" href="style.less">	
+		<script src="jquery.js"></script>
+		<script src="underscore.js"></script>
+		<script src="less.js"></script>			  
+		<script src="angular.js"></script>	
+		<script src="angular-ui.js "></script>	
+		<script src="js/controllers.js"></script>						
+	</head>
+	<body ng-controller="DoctorListCtrl">
+		<div class="medical-container">
+			<div class="med-container-fluid clearfix">
+				<div class="med-content">
+					<header>
+						<h1>Medical Information Record</h1>						
+					</header>
+					<section>						
+						<div class="dropdownlist-wrapper">Year</div>
+						<div class="dropdownlist-wrapper">Date</div>						
+					</section>					
+					<section>
+						<div class="dropdownlist-wrapper">
+							<select data-ng-model="selectedYear" data-ng-options="o.year for o in medicaldata | unique:'year'"  ng-change="yearChange($event)">
+								<option value= "">-- choose a year --</option>
+						    </select>
+						</div>
+						<div class="dropdownlist-wrapper">
+							<select data-ng-model="selectedDate" data-ng-options="o.apptdate for o in medicaldata | filter:selectedYearDate"  ng-change="apptDateChange($event)">
+								<option value= "">-- choose a date --</option>	
+						    </select>
+						</div>						
+					</section>
+					<section class='selected-medical-status'>						
+						<p>I have selected  {{selectedYear.year}} and visit  date {{selectedDate.apptdate}}</p>
+						<input type='button' value='SHOW DETAILS' class='showdetailbtn'></input>
+					</section>
+					<section class='medical-info-detail-container'>
+						<p>
+						<label for='visit-date'>Date of Visit</label>:<span class='medical-info-data'>{{selectedDate.apptdate}}</span>
+						</p>
+						<p>
+						<label for='doctor'>Doctor</label>:<span class='medical-info-data doctor-name'></span>
+						</p>
+						<p>
+						 <label for='illness'>Cause</label>:<span class='medical-info-data illness-name'></span>
+						</p>
+						<p>
+							<label for='visit-details'>Details of visit</label>:
+							<p class="visit-details-text">				
+							</p>
+						</p>
+					</section>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
